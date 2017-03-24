@@ -1,0 +1,21 @@
+apply plugin: 'application'
+
+mainClassName = "de.ur.agennt.ui.AgenntApplication"
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+applicationDistribution.from("${rootProject.projectDir}/") {
+    include "README.txt", "user_whitelist.txt"
+}
+
+dependencies {
+    compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+    compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.2'
+    compile group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.5.2'
+    compile group: 'org.apache.commons', name: 'commons-io', version: '1.3.2'
+}

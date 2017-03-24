@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="1037.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.ur.agennt.ui.ProjectSceneController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <center>
+                  <TreeView fx:id="projectTreeView" BorderPane.alignment="CENTER" />
+               </center>
+               <bottom>
+                  <ImageView fx:id="logoImageView" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </BorderPane.margin>
+                  </ImageView>
+               </bottom>
+            </BorderPane>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <StackPane fx:id="contentPane" layoutX="108.0" layoutY="124.0" prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TitledPane fx:id="projectTitledPane" animated="false" collapsible="false" text="Project:" visible="false" StackPane.alignment="TOP_CENTER">
+                    <content>
+                      <AnchorPane>
+                           <children>
+                              <HBox layoutX="12.0" layoutY="12.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Button defaultButton="true" mnemonicParsing="false" onAction="#addSSNAction" text="Add SSN File..." />
+                                    <Button mnemonicParsing="false" onAction="#addRawGNNAction" text="Add GNN File..." />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+                  <TitledPane fx:id="ssnTitledPane" animated="false" text="untitled" StackPane.alignment="TOP_CENTER">
+                    <content>
+                      <AnchorPane prefHeight="571.0" prefWidth="721.0">
+                           <children>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <top>
+                                          <VBox>
+                                             <children>
+                                                <FlowPane hgap="20.0">
+                                                   <children>
+                                                      <Label fx:id="sequenceCountLabel" text="Label" />
+                                                      <Label fx:id="nodeCountLabel" text="Label" />
+                                                      <Label fx:id="edgeCountLabel" text="Label" />
+                                                      <Label fx:id="minThLabel" text="Label" />
+                                                      <Label fx:id="maxThLabel" text="Label" />
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </FlowPane>
+                                                <FlowPane hgap="20.0">
+                                                   <children>
+                                                      <Label fx:id="apeltsinThLabel" text="Label">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="smoothThLabel" text="Label">
+                                                          <font>
+                                                              <Font name="System Bold" size="15.0" />
+                                                          </font>
+                                                      </Label>
+                                                   </children>
+                                                </FlowPane>
+                                             </children>
+                                             <FlowPane.margin>
+                                                <Insets />
+                                             </FlowPane.margin>
+                                          </VBox>
+                                 </top>
+                                 <center>
+                                    <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                                      <tabs>
+                                        <Tab text="Histogram">
+                                          <content>
+                                            <AnchorPane prefHeight="380.0" prefWidth="390.0">
+                                                   <children>
+                                                      <BarChart fx:id="histogramBarChart" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <xAxis>
+                                                          <CategoryAxis side="BOTTOM" />
+                                                        </xAxis>
+                                                        <yAxis>
+                                                          <NumberAxis side="LEFT" />
+                                                        </yAxis>
+                                                      </BarChart>
+                                                   </children></AnchorPane>
+                                          </content>
+                                        </Tab>
+                                        <Tab text="Nsv">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <LineChart fx:id="nsvLineChart" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <xAxis>
+                                                          <CategoryAxis side="BOTTOM" />
+                                                        </xAxis>
+                                                        <yAxis>
+                                                          <NumberAxis side="LEFT" />
+                                                        </yAxis>
+                                                      </LineChart>
+                                                   </children></AnchorPane>
+                                          </content>
+                                        </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </center>
+                                 <bottom>
+                                    <FlowPane hgap="20.0" vgap="10.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Button fx:id="createFilteredButton" defaultButton="true" mnemonicParsing="false" onAction="#createFilteredSSNAction" text="Create filtered SSN..." />
+                                          <Button fx:id="requestGNNButton" defaultButton="true" mnemonicParsing="false" onAction="#requestGNNAction" text="Request GNN..." />
+                                          <Button fx:id="addGNNButton" mnemonicParsing="false" onAction="#addGNNAction" text="Add GNN..." />
+                                          <Button mnemonicParsing="false" onAction="#viewCytoscapeAction" text="View in Cytoscape" />
+                                       </children>
+                                       <padding>
+                                          <Insets top="20.0" />
+                                       </padding>
+                                    </FlowPane>
+                                 </bottom>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+                  <TitledPane fx:id="gnnTitledPane" animated="false" text="untitled" StackPane.alignment="TOP_CENTER">
+                    <content>
+                      <AnchorPane>
+                           <children>
+                              <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <top>
+                                    <FlowPane hgap="20.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label fx:id="neighborhoodLabel" text="Label" />
+                                          <Label fx:id="coocurrenceLabel" text="Label" />
+                                          <Label fx:id="gnnSequenceCountLabel" text="Label" />
+                                          <Label fx:id="clusterCountLabel" text="Label" />
+                                          <Label fx:id="neighborhoodCountLabel" text="Label" />
+                                       </children>
+                                    </FlowPane>
+                                 </top>
+                                 <center>
+                                    <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                                      <tabs>
+                                        <Tab text="Neighborhood">
+                                          <content>
+                                            <AnchorPane>
+                                                   <children>
+                                                      <TableView fx:id="hyperNeighborhoodTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <columns>
+                                                          <TableColumn prefWidth="75.0" text="Cluster" />
+                                                          <TableColumn prefWidth="75.0" text="Pfam" />
+                                                            <TableColumn prefWidth="105.0" text="Uniqueness" />
+                                                            <TableColumn prefWidth="105.0" text="Coverage"/>
+                                                            <TableColumn prefWidth="107.0" text="#Cluster" />
+                                                            <TableColumn prefWidth="75.0" text="#Pfam" />
+                                                            <TableColumn prefWidth="123.0" text="#Neighborhood" />
+                                                            <TableColumn prefWidth="75.0" text="GO" />
+                                                            <TableColumn prefWidth="75.0" text="Description" />
+                                                        </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </Tab>
+                                          <Tab text="Cluster">
+                                            <content>
+                                              <AnchorPane>
+                                                   <children>
+                                                      <TableView fx:id="clusterTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <columns>
+                                                          <TableColumn prefWidth="75.0" text="Cluster" />
+                                                          <TableColumn prefWidth="119.0" text="Size" />
+                                                            <TableColumn prefWidth="137.0" text="Uniqueness" />
+                                                            <TableColumn prefWidth="75.0" text="Nodes" />
+                                                            <TableColumn prefWidth="75.0" text="Phylum" />
+                                                        </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
+                                          </Tab>
+                                        <Tab text="Pfam">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="pfamTable" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <columns>
+                                                          <TableColumn prefWidth="75.0" text="Pfam" />
+                                                          <TableColumn prefWidth="75.0" text="Size" />
+                                                            <TableColumn prefWidth="75.0" text="Description" />
+                                                            <TableColumn prefWidth="75.0" text="GO" />
+                                                            <TableColumn prefWidth="75.0" text="Uniqueness" />
+                                                        </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </center>
+                                 <bottom>
+                                    <FlowPane hgap="20.0" prefHeight="200.0" prefWidth="200.0" vgap="10.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Button fx:id="filterGNNButton" defaultButton="true" mnemonicParsing="false" onAction="#filterGNNAction" text="Create filtered GNN..." />
+                                          <Button mnemonicParsing="false" onAction="#viewCytoscapeAction" text="View GNN in Cytoscape" />
+                                          <Button mnemonicParsing="false" onAction="#viewColoredCytoscapeAction" text="View Colored SSN in Cytoscape">
+                                             <FlowPane.margin>
+                                                <Insets />
+                                             </FlowPane.margin>
+                                          </Button>
+                                          <Button mnemonicParsing="false" onAction="#viewExtendedCytoscapeAction" text="View rGNN in Cytoscape" />
+                                       </children>
+                                       <BorderPane.margin>
+                                          <Insets />
+                                       </BorderPane.margin>
+                                       <padding>
+                                          <Insets top="20.0" />
+                                       </padding>
+                                    </FlowPane>
+                                 </bottom>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+               </children>
+            </StackPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
