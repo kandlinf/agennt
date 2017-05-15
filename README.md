@@ -6,7 +6,7 @@ AGeNNT can be started without any additional configuration
 by executing `agennt.bat` (Windows) or `agennt` (Linux) in the
 subdirectory `.\bin`.
 
-##Runtime Environment
+## Runtime Environment
 AGeNNT needs at least Oracle Java SE Runtime Environment
 Version 8 Update 101. It can be downloaded for most operating
 systems from https://www.java.com/download/
