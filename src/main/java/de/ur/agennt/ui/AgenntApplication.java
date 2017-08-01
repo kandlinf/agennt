@@ -11,9 +11,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 
-public class AgenntApplication extends Application implements ProjectViewer{
+public class AgenntApplication extends Application implements ProjectViewer {
 
     public static void main(String[] args) {
+
+
+
+
+
+
         boolean launched = false;
         try {
             Object fxObject = System.getProperties().get("javafx.runtime.version");
