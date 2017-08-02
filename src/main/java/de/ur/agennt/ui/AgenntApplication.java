@@ -20,6 +20,7 @@ public class AgenntApplication extends Application implements ProjectViewer {
         Options options = new Options();
         options.addOption(Option.builder().longOpt("help").desc("Show information about usage").build());
         options.addOption(Option.builder().longOpt("create-project").hasArg().argName("NAME").desc("Create project with NAME").build());
+        options.addOption(Option.builder().longOpt("delete-project").hasArg().argName("NAME").desc("Create project with NAME").build());
         //-PappArgs="['--create-project=Hans']"
         ServiceFacade serviceFacade = ServiceFacade.getInstance();
         try {
@@ -31,14 +32,17 @@ public class AgenntApplication extends Application implements ProjectViewer {
             } else if(line.hasOption("create-project")) {
                     String projectName = line.getOptionValue("create-project");
                     serviceFacade.createProject(projectName);
-            } else {
+            } else if(line.hasOption("delete-project")) {
+                //String projectName = line.getOptionValue("delete-project");
+                //serviceFacade.deleteProject(serviceFacade.listProje);
+            }  else {
                 boolean launched = false;
                 try {
                     Object fxObject = System.getProperties().get("javafx.runtime.version");
                     if (fxObject != null) {
                         String fxString = fxObject.toString();
                         System.out.println("JavaFX: " + fxString);
-                        String[] fxArray = fxString.split("\\.");
+                        String[] fxArray = fxString.split("\\."); //d
                         int major = Integer.parseInt(fxArray[0]);
                         int minor = Integer.parseInt(fxArray[1]);
                         String[] patchArray = fxArray[2].split("-");
@@ -67,6 +71,7 @@ public class AgenntApplication extends Application implements ProjectViewer {
         catch( ParseException exp ) {
             System.out.println(exp.getMessage() );
         }
+        System.exit(0);
     }
 
     private Stage primaryStage;
