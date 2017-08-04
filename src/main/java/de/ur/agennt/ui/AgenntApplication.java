@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.apache.commons.cli.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 
@@ -29,6 +30,8 @@ public class AgenntApplication extends Application implements ProjectViewer {
         options.addOption(Option.builder().longOpt("help").desc("Show information about usage").build());
         options.addOption(Option.builder().longOpt("create-project").hasArg().argName("NAME").desc("Create project with NAME").build());
         options.addOption(Option.builder().longOpt("delete-project").hasArg().argName("NAME").desc("Create project with NAME").build());
+        options.addOption(Option.builder().longOpt("add-ssn").hasArgs().numberOfArgs(2).argName("FILE> ><NAME").desc("Add SSN file FILE to project NAME").build());
+
         //-PappArgs="['--create-project=Hans']"
         ServiceFacade serviceFacade = ServiceFacade.getInstance();
         try {
@@ -48,7 +51,23 @@ public class AgenntApplication extends Application implements ProjectViewer {
                 } else {
                     System.err.println("Project not found!");
                 }
-            }  else {
+            } else if(line.hasOption("add-ssn")) {
+                String argus = line.getOptionValue("delete-project");
+                String[] argusSplit = argus.split(" ");
+                if(argusSplit.length == 2) {
+                    String projectName = argusSplit[0];
+                    String fileName = argusSplit[1];
+                    Project project = findProjectByName(projectName);
+                    if (project != null) {
+                        serviceFacade.addSsnToProject(project, new File(fileName));
+                    } else {
+                        System.err.println("Project not found!");
+                    }
+                } else {
+                    HelpFormatter formatter = new HelpFormatter();
+                    formatter.printHelp( "agennt", options );
+                }
+            } else {
                 boolean launched = false;
                 try {
                     Object fxObject = System.getProperties().get("javafx.runtime.version");
@@ -81,7 +100,7 @@ public class AgenntApplication extends Application implements ProjectViewer {
             }
 
         }
-        catch( ParseException exp ) {
+        catch( Exception exp ) {
             System.out.println(exp.getMessage() );
         }
         System.exit(0);
