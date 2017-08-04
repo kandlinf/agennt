@@ -14,6 +14,14 @@ import java.io.IOException;
 import java.lang.management.ManagementFactory;
 
 public class AgenntApplication extends Application implements ProjectViewer {
+    private static Project findProjectByName(String name) {
+        ServiceFacade serviceFacade = ServiceFacade.getInstance();
+        for(Project project : serviceFacade.listProjects()) {
+            if(project.getName().equals(name))
+                return project;
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         CommandLineParser parser = new DefaultParser();
@@ -33,8 +41,13 @@ public class AgenntApplication extends Application implements ProjectViewer {
                     String projectName = line.getOptionValue("create-project");
                     serviceFacade.createProject(projectName);
             } else if(line.hasOption("delete-project")) {
-                //String projectName = line.getOptionValue("delete-project");
-                //serviceFacade.deleteProject(serviceFacade.listProje);
+                String projectName = line.getOptionValue("delete-project");
+                Project project = findProjectByName(projectName);
+                if(project != null) {
+                    serviceFacade.deleteProject(project);
+                } else {
+                    System.err.println("Project not found!");
+                }
             }  else {
                 boolean launched = false;
                 try {
@@ -42,7 +55,7 @@ public class AgenntApplication extends Application implements ProjectViewer {
                     if (fxObject != null) {
                         String fxString = fxObject.toString();
                         System.out.println("JavaFX: " + fxString);
-                        String[] fxArray = fxString.split("\\."); //d
+                        String[] fxArray = fxString.split("\\.");
                         int major = Integer.parseInt(fxArray[0]);
                         int minor = Integer.parseInt(fxArray[1]);
                         String[] patchArray = fxArray[2].split("-");
