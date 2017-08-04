@@ -19,8 +19,8 @@ Its content can be altered by the user and used alternatively.
 AGeNNT provides an additional CLI with the following commands:
 ```
 usage: agennt
-    --add-ssn <FILE> ><NAME>   Add SSN file FILE to project NAME
-    --create-project <NAME>    Create project with NAME
-    --delete-project <NAME>    Create project with NAME
-    --help                     Show information about usage
+    --add-ssn <FILE> <NAME>   Add SSN file FILE to project NAME
+    --create-project <NAME>   Create project with NAME
+    --delete-project <NAME>   Create project with NAME
+    --help                    Show information about usage
 ```

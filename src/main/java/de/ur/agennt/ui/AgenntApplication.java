@@ -30,7 +30,7 @@ public class AgenntApplication extends Application implements ProjectViewer {
         options.addOption(Option.builder().longOpt("help").desc("Show information about usage").build());
         options.addOption(Option.builder().longOpt("create-project").hasArg().argName("NAME").desc("Create project with NAME").build());
         options.addOption(Option.builder().longOpt("delete-project").hasArg().argName("NAME").desc("Create project with NAME").build());
-        options.addOption(Option.builder().longOpt("add-ssn").hasArgs().numberOfArgs(2).argName("FILE> ><NAME").desc("Add SSN file FILE to project NAME").build());
+        options.addOption(Option.builder().longOpt("add-ssn").hasArgs().numberOfArgs(2).argName("FILE> <NAME").desc("Add SSN file FILE to project NAME").build());
 
         //-PappArgs="['--create-project=Hans']"
         ServiceFacade serviceFacade = ServiceFacade.getInstance();
