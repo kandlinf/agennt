@@ -28,9 +28,10 @@ public class AgenntApplication extends Application implements ProjectViewer {
         CommandLineParser parser = new DefaultParser();
         Options options = new Options();
         options.addOption(Option.builder().longOpt("help").desc("Show information about usage").build());
-        options.addOption(Option.builder().longOpt("create-project").hasArg().argName("NAME").desc("Create project with NAME").build());
-        options.addOption(Option.builder().longOpt("delete-project").hasArg().argName("NAME").desc("Create project with NAME").build());
-        options.addOption(Option.builder().longOpt("add-ssn").hasArgs().numberOfArgs(2).argName("FILE> <NAME").desc("Add SSN file FILE to project NAME").build());
+        options.addOption(Option.builder().longOpt("create").desc("Create project").build());
+        options.addOption(Option.builder().longOpt("delete").desc("Delete project").build());
+        options.addOption(Option.builder().longOpt("add-ssn").hasArgs().argName("FILE").desc("Add SSN file FILE").build());
+        options.addOption(Option.builder().longOpt("project").hasArgs().argName("NAME").desc("Specifies project with NAME").build());
 
         //-PappArgs="['--create-project=Hans']"
         ServiceFacade serviceFacade = ServiceFacade.getInstance();
@@ -40,11 +41,11 @@ public class AgenntApplication extends Application implements ProjectViewer {
             if(line.hasOption("help")) {
                 HelpFormatter formatter = new HelpFormatter();
                 formatter.printHelp( "agennt", options );
-            } else if(line.hasOption("create-project")) {
-                    String projectName = line.getOptionValue("create-project");
+            } else if(line.hasOption("create")) {
+                    String projectName = line.getOptionValue("project");
                     serviceFacade.createProject(projectName);
-            } else if(line.hasOption("delete-project")) {
-                String projectName = line.getOptionValue("delete-project");
+            } else if(line.hasOption("delete")) {
+                String projectName = line.getOptionValue("project");
                 Project project = findProjectByName(projectName);
                 if(project != null) {
                     serviceFacade.deleteProject(project);
@@ -52,21 +53,14 @@ public class AgenntApplication extends Application implements ProjectViewer {
                     System.err.println("Project not found!");
                 }
             } else if(line.hasOption("add-ssn")) {
-                String argus = line.getOptionValue("delete-project");
-                String[] argusSplit = argus.split(" ");
-                if(argusSplit.length == 2) {
-                    String projectName = argusSplit[0];
-                    String fileName = argusSplit[1];
+                    String projectName = line.getOptionValue("project");
+                    String fileName = line.getOptionValue("add-ssn");
                     Project project = findProjectByName(projectName);
                     if (project != null) {
                         serviceFacade.addSsnToProject(project, new File(fileName));
                     } else {
                         System.err.println("Project not found!");
                     }
-                } else {
-                    HelpFormatter formatter = new HelpFormatter();
-                    formatter.printHelp( "agennt", options );
-                }
             } else {
                 boolean launched = false;
                 try {
