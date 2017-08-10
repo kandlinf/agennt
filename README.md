@@ -25,8 +25,8 @@ agennt --create --project Test
 Add a SSN to the project
 agennt --add-ssn sample.xgmml --project Test
 
-Filter SSN with threshold 40 and taxonomy filter
-agennt --filter-ssn --project Test --th 40 --tax true
+Filter SSN with automatic threshold and taxonomy filter
+agennt --filter-ssn --project Test --tax true
 
 Request GNN with co-occurrence of 20 and neighborhood size 10
 agennt --add-gnn --co 20 --nh 10 --email "test@example.com" --project Test
@@ -54,5 +54,5 @@ usage: agennt
     --nh <NH>          Neighborhood Size
     --project <NAME>   Specifies project with NAME
     --tax <TAXONOMY>   Apply taxonomy filter (true,false)
-    --th <THRESHOLD>   Apply specified threshold
+    --th <THRESHOLD>   Apply specified threshold (optional)
 ```

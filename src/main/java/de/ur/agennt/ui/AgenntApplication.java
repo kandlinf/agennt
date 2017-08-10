@@ -1,7 +1,9 @@
 package de.ur.agennt.ui;
 
 import de.ur.agennt.entity.project.Project;
+import de.ur.agennt.entity.ssn.SsnAnalyzerResult;
 import de.ur.agennt.service.ServiceFacade;
+import de.ur.agennt.service.ssn.SmoothThreshold;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,7 +34,7 @@ public class AgenntApplication extends Application implements ProjectViewer {
         options.addOption(Option.builder().longOpt("delete").desc("Delete project").build());
         options.addOption(Option.builder().longOpt("add-ssn").hasArgs().argName("FILE").desc("Add SSN file FILE").build());
         options.addOption(Option.builder().longOpt("filter-ssn").desc("Filter first SSN in project").build());
-        options.addOption(Option.builder().longOpt("th").hasArgs().argName("THRESHOLD").desc("Apply specified threshold").build());
+        options.addOption(Option.builder().longOpt("th").hasArgs().argName("THRESHOLD").desc("Apply specified threshold (optional/auto)").build());
         options.addOption(Option.builder().longOpt("tax").hasArgs().argName("TAXONOMY").desc("Apply taxonomy filter (true,false)").build());
         options.addOption(Option.builder().longOpt("project").hasArgs().argName("NAME").desc("Specifies project with NAME").build());
         options.addOption(Option.builder().longOpt("add-gnn").desc("Request GNN for first filtered SSN in project").build());
@@ -75,6 +77,11 @@ public class AgenntApplication extends Application implements ProjectViewer {
                 String th = line.getOptionValue("th");
                 String tax = line.getOptionValue("tax");
                 Project project = findProjectByName(projectName);
+                if(th == null) {
+                    SsnAnalyzerResult result = project.getAnalyzerResult(project.getSsnFiles().get(0));
+                    SmoothThreshold smoothThreshold = new SmoothThreshold(result);
+                    th = smoothThreshold.getThreshold().toString();
+                }
                 serviceFacade.addFilteredSsnToProject(project,project.getSsnFiles().get(0),new Integer(th), new Boolean(tax));
 
             } else if(line.hasOption("add-gnn")) {
