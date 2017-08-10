@@ -16,5 +16,5 @@ The file `user_whitelist.txt` is a copy of the built-in whitelist.
 Its content can be altered by the user and used alternatively.
 
 ## Command Line Interface
-AGeNNT provides an additional CLI. See the [command line refernce](cli.md) for 
+AGeNNT provides an additional CLI. See the [command line reference](cli.md) for 
 documentation.
