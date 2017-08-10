@@ -28,6 +28,9 @@ agennt --add-ssn sample.xgmml --project Test
 Filter SSN with threshold 40 and taxonomy filter
 agennt --filter-ssn --project Test --th 40 --tax true
 
+Request GNN with co-occurrence of 20 and neighborhood size 10
+agennt --add-gnn --co 20 --nh 10 --email "test@example.com" --project Test
+
 Delete a project
 agennt --delete --project Test
 ```
