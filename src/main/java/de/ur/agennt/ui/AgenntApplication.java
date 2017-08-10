@@ -39,6 +39,8 @@ public class AgenntApplication extends Application implements ProjectViewer {
         options.addOption(Option.builder().longOpt("co").hasArgs().argName("CO").desc("Co-occurrence").build());
         options.addOption(Option.builder().longOpt("nh").hasArgs().argName("NH").desc("Neighborhood Size").build());
         options.addOption(Option.builder().longOpt("email").hasArgs().argName("EMAIL").desc("EMail").build());
+        options.addOption(Option.builder().longOpt("filter-gnn").desc("Filter first GNN in project").build());
+        options.addOption(Option.builder().longOpt("filter").hasArgs().argName("FILE").desc("Filter file for GNN filtering (optional)").build());
 
         //-PappArgs="['--create-project=Hans']"
         ServiceFacade serviceFacade = ServiceFacade.getInstance();
@@ -84,6 +86,16 @@ public class AgenntApplication extends Application implements ProjectViewer {
                 File ssn = project.getSsnFiles().get(0);
                 File filteredSSN = project.getFilteredFiles(ssn).get(0);
                 serviceFacade.addGnnToProject(project,filteredSSN,new Integer(nh), new Integer(co), email);
+            }  else if(line.hasOption("filter-gnn")) {
+                String projectName = line.getOptionValue("project");
+                String filter = line.getOptionValue("filter");
+                File filterFile = null;
+                if(filter != null) filterFile = new File(filter);
+                Project project = findProjectByName(projectName);
+                File ssn = project.getSsnFiles().get(0);
+                File filteredSSN = project.getFilteredFiles(ssn).get(0);
+                File gnn = project.getGNNFiles(filteredSSN).get(0);
+                serviceFacade.addFilteredGnnToProject(project,gnn,filterFile);
             } else {
                 boolean launched = false;
                 try {
