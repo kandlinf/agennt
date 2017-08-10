@@ -18,7 +18,7 @@ Its content can be altered by the user and used alternatively.
 ## Command Line Interface
 AGeNNT provides an additional CLI.
 
-###Create a new project
-'''
+### Create a new project
+```
 agennt --create --project Test
-'''
+```
