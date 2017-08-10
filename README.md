@@ -18,17 +18,16 @@ Its content can be altered by the user and used alternatively.
 ## Command Line Interface
 AGeNNT provides an additional CLI.
 
-### Create a new project
 ```
+Create a new project
 agennt --create --project Test
-```
 
-### Delete a project
-```
-agennt --delete --project Test
-```
-
-### Add a SSN to the project
-```
+Add a SSN to the project
 agennt --add-ssn sample.xgmml --project Test
+
+Filter SSN with threshold 40 and taxonomy filter
+agennt --filter-ssn --project Test --th 40 --tax true
+
+Delete a project
+agennt --delete --project Test
 ```

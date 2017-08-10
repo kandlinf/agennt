@@ -31,6 +31,9 @@ public class AgenntApplication extends Application implements ProjectViewer {
         options.addOption(Option.builder().longOpt("create").desc("Create project").build());
         options.addOption(Option.builder().longOpt("delete").desc("Delete project").build());
         options.addOption(Option.builder().longOpt("add-ssn").hasArgs().argName("FILE").desc("Add SSN file FILE").build());
+        options.addOption(Option.builder().longOpt("filter-ssn").desc("Filter first SSN in project").build());
+        options.addOption(Option.builder().longOpt("th").hasArgs().argName("THRESHOLD").desc("Apply specified threshold").build());
+        options.addOption(Option.builder().longOpt("tax").hasArgs().argName("TAXONOMY").desc("Apply taxonomy filter (true,false)").build());
         options.addOption(Option.builder().longOpt("project").hasArgs().argName("NAME").desc("Specifies project with NAME").build());
 
         //-PappArgs="['--create-project=Hans']"
@@ -61,6 +64,13 @@ public class AgenntApplication extends Application implements ProjectViewer {
                     } else {
                         System.err.println("Project not found!");
                     }
+            } else if(line.hasOption("filter-ssn")) {
+                String projectName = line.getOptionValue("project");
+                String th = line.getOptionValue("th");
+                String tax = line.getOptionValue("tax");
+                Project project = findProjectByName(projectName);
+                serviceFacade.addFilteredSsnToProject(project,project.getSsnFiles().get(0),new Integer(th), new Boolean(tax));
+
             } else {
                 boolean launched = false;
                 try {
