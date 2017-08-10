@@ -22,3 +22,13 @@ AGeNNT provides an additional CLI.
 ```
 agennt --create --project Test
 ```
+
+### Delete a project
+```
+agennt --delete --project Test
+```
+
+### Add a SSN to the project
+```
+agennt --add-ssn sample.xgmml --project Test
+```
